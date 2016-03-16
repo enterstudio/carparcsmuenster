@@ -1,7 +1,6 @@
 import React from 'react';
 import CarParcsStore from '../stores/CarParcsStore';
 import * as CarParcsActions from '../actions/CarParcsActions';
-import TopNav from '../components/TopNav';
 
 export default class Index extends React.Component {
     constructor() {
@@ -18,9 +17,9 @@ export default class Index extends React.Component {
     updateParcs() {
         this.setState({
             parcs: CarParcsStore.getAll().sort(function (a, b) {
-                if(a.free_percent < b.free_percent)
-                    return -1;
                 if(a.free_percent > b.free_percent)
+                    return -1;
+                if(a.free_percent < b.free_percent)
                     return 1;
                 return 0;
             })
@@ -46,8 +45,7 @@ export default class Index extends React.Component {
     render() {
         return (
             <div>
-                <TopNav />
-                <div class="container-fluid" style={{paddingTop: '80px'}}>
+                <div class="container-fluid">
                     <div className="jumbotron">
                         <h1>Finde Parkplätze</h1>
                     </div>
