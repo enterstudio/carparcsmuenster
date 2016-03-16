@@ -16,7 +16,13 @@ export default class Index extends React.Component {
 
     updateParcs() {
         this.setState({
-            parcs: CarParcsStore.getAll()
+            parcs: CarParcsStore.getAll().sort(function (a, b) {
+                if(a.free_percent < b.free_percent)
+                    return -1;
+                if(a.free_percent > b.free_percent)
+                    return 1;
+                return 0;
+            })
         });
     }
 
@@ -28,8 +34,8 @@ export default class Index extends React.Component {
         CarParcsStore.removeListener('change', this.updateParcs);
     }
 
-    renderParcButtons(parc) {
-        return <button class="btn btn-primary col-xs-12">{parc.name}({parc.free}/{parc.total})</button>
+    renderParcButtons(parc, index) {
+        return <a key={index} class="btn btn-primary col-xs-12" href={"#/details/" + encodeURIComponent(parc.name)}>{parc.name} ({parc.free_percent}% frei)</a>
     }
 
     render() {
