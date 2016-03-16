@@ -1,35 +1,35 @@
 import React from 'react';
-import $ from 'jquery';
+import CarParcsStore from '../stores/CarParcsStore';
+import * as CarParcsActions from '../actions/CarParcsActions';
 
 export default class Index extends React.Component {
     constructor() {
         super();
 
+        this.updateParcs = this.updateParcs.bind(this);
         this.state = {
-            parcButtons: []
+            parcs: []
         };
 
-        this.parcButtons = null;
-        this.getParcs();
+        CarParcsActions.getCarParcs();
     }
 
-    getParcs() {
-        var self = this;
-        $.ajax({
-            url: 'https://parkleit-api.codeformuenster.org/',
-            success: function (data) {
-                var parcs = JSON.parse(data).features;
-                var parcsButtons = [];
-                parcs.forEach((parcInfo) => {
-                    var parcProps = parcInfo.properties;
-                    parcsButtons.push(<p><button className="btn btn-default">{parcProps.name} ({parcProps.free}/{parcProps.total})</button></p>);
-                });
-
-                self.setState({
-                    parcButtons: parcsButtons
-                })
-            }
+    updateParcs() {
+        this.setState({
+            parcs: CarParcsStore.getAll()
         });
+    }
+
+    componentWillMount() {
+        CarParcsStore.on('change', this.updateParcs);
+    }
+
+    componentWillUnmount() {
+        CarParcsStore.removeListener('change', this.updateParcs);
+    }
+
+    renderParcButtons(parc) {
+        return <button class="btn btn-primary col-xs-12">{parc.name}({parc.free}/{parc.total})</button>
     }
 
     render() {
@@ -38,7 +38,7 @@ export default class Index extends React.Component {
                 <div className="jumbotron">
                     <h1>Finde Parkplätze</h1>
                 </div>
-                {this.state.parcButtons}
+                {this.state.parcs.map(this.renderParcButtons.bind(this))}
             </div>
         );
     }
