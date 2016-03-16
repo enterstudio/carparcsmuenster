@@ -46,7 +46,7 @@ class Details extends React.Component {
                     <li>{parc.updated_at}</li>
                     <li>{type}</li>
                 </ul>
-                <MapView />
+                <MapView lat={51.962} lng={7.625}/>
                 <button class="btn btn-primary">Navigate</button>
             </div>
         );

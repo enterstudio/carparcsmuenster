@@ -1,6 +1,7 @@
 import React from 'react';
 import CarParcsStore from '../stores/CarParcsStore';
 import * as CarParcsActions from '../actions/CarParcsActions';
+import TopNav from '../components/TopNav';
 
 export default class Index extends React.Component {
     constructor() {
@@ -35,16 +36,23 @@ export default class Index extends React.Component {
     }
 
     renderParcButtons(parc, index) {
-        return <a key={index} class="btn btn-primary col-xs-12" href={"#/details/" + encodeURIComponent(parc.name)}>{parc.name} ({parc.free_percent}% frei)</a>
+        return (
+            <div class="row" key={index}>
+                <a class="btn btn-primary btn-lg col-xs-12" href={"#/details/" + encodeURIComponent(parc.name)}>{parc.name} ({parc.free_percent}% frei)</a>
+            </div>
+        );
     }
 
     render() {
         return (
             <div>
-                <div className="jumbotron">
-                    <h1>Finde Parkplätze</h1>
+                <TopNav />
+                <div class="container-fluid" style={{paddingTop: '80px'}}>
+                    <div className="jumbotron">
+                        <h1>Finde Parkplätze</h1>
+                    </div>
+                    {this.state.parcs.map(this.renderParcButtons.bind(this))}
                 </div>
-                {this.state.parcs.map(this.renderParcButtons.bind(this))}
             </div>
         );
     }

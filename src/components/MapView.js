@@ -7,11 +7,16 @@ class MapView extends React.Component {
     }
 
     render() {
+        const {lat, lng} = this.props;
         return (
             <div id="map" style={{height: '450px'}}>
                 <GoogleMapLoader
                     containerElement={<div style={{height: '100%'}}></div>}
-                    googleMapElement={<GoogleMap defaultZoom={3} defaultCenter={{lat: -25.363882, lng: 131.044922}} />}
+                    googleMapElement={
+                        <GoogleMap defaultZoom={12} defaultCenter={{lng: 7.625, lat: 51.962}}>
+                            <Marker position={{lng, lat}}/>
+                        </GoogleMap>
+                        }
                 />
             </div>
         );
