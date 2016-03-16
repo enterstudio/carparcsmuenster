@@ -2,6 +2,8 @@ import React from 'react';
 import CarsParcsStore from '../stores/CarParcsStore';
 import * as Actions from '../actions/CarParcsActions';
 
+import MapView from '../components/MapView';
+
 class Details extends React.Component {
     constructor() {
         super();
@@ -44,6 +46,8 @@ class Details extends React.Component {
                     <li>{parc.updated_at}</li>
                     <li>{type}</li>
                 </ul>
+                <MapView />
+                <button class="btn btn-primary">Navigate</button>
             </div>
         );
     }
