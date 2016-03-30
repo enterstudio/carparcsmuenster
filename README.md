@@ -1,9 +1,3 @@
----
-status: in progress
-uri: http://codeformuenster.org/carparcsmuenster/ 
-----
-
-
 Parkplätze in Münster
 =====================
 
