@@ -35,6 +35,11 @@ class Details extends React.Component {
         });
     }
 
+    navigate() {
+        const {parc} = this.state;
+        console.log("Navigate to", parc);
+    }
+
     render() {
         const { parc } = this.state;
         const type = parc.underground ? 'Tiefgarage' : 'Parkplatz';
@@ -49,7 +54,9 @@ class Details extends React.Component {
                     <li>{type}</li>
                 </ul>
                 <MapView lat={parc.lat} lng={parc.lng}/>
-                <button class="btn btn-primary">Navigate</button>
+                <div class="row">
+                    <a class="btn btn-primary col-xs-12" href={"geo:" + parc.lat + "," + parc.lng}>Navigate</a>
+                </div>
             </div>
         );
     }
