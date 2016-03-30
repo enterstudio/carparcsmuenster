@@ -36,3 +36,17 @@ export function getCarParcs() {
             });
         });
 }
+
+export function getLocation() {
+    var showPosition = function (position) {
+        console.log(position);
+        CarParcsDispatcher.dispatch({
+            type: 'GOT_LOCATION',
+            position
+        });
+    };
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+}
