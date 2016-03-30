@@ -49,16 +49,9 @@ class Details extends React.Component {
 
     navigationStr() {
         return "geo:"
-                + this.state.location.latitude
-                + "," + this.state.location.longitude
-                + "?saddr=("
-                + this.state.location.latitude
-                + "," + this.state.location.longitude
-                + ")&daddr=("
                 + this.state.parc.lat
                 + ","
-                + this.state.parc.lng
-                + ")";
+                + this.state.parc.lng;
     }
 
     render() {
