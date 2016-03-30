@@ -12,22 +12,22 @@ export function getCarParcs() {
             var parcs = [];
 
             features.forEach((parc) => {
-                parc.properties.free_percent = Number(((parc.properties.free/parc.properties.total)*100).toFixed(0));
-                parc.properties.full_percent = 100 - parc.properties.free_percent;
-                parc.properties.updated_at = moment(parc.properties.updated_at);
+                if (!parc.properties.error) {
+                    parc.properties.free_percent = Number(((parc.properties.free/parc.properties.total)*100).toFixed(0));
+                    parc.properties.full_percent = 100 - parc.properties.free_percent;
+                    parc.properties.updated_at = moment(parc.properties.updated_at);
 
-                const {geometry} = parc;
-                if(geometry.type == 'Point') {
-                    parc.properties.lat = Number(parc.geometry.coordinates[1]);
-                    parc.properties.lng = Number(parc.geometry.coordinates[0]);
-                } else {
-                    parc.properties.lat = Number(parc.geometry.coordinates[0][0][1]);
-                    parc.properties.lng = Number(parc.geometry.coordinates[0][0][0]);
+                    const {geometry} = parc;
+                    if(geometry.type == 'Point') {
+                        parc.properties.lat = Number(parc.geometry.coordinates[1]);
+                        parc.properties.lng = Number(parc.geometry.coordinates[0]);
+                    } else {
+                        parc.properties.lat = Number(parc.geometry.coordinates[0][0][1]);
+                        parc.properties.lng = Number(parc.geometry.coordinates[0][0][0]);
+                    }
+
+                    parcs.push(parc.properties);
                 }
-
-                console.log(parc.properties.lat, parc.properties.lng);
-
-                parcs.push(parc.properties);
             });
 
             CarParcsDispatcher.dispatch({
