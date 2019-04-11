@@ -25,7 +25,7 @@
     "babel-preset-stage-0": "6.3.13",
     "bootstrap": "^3.3.6",
     "flux": "^2.1.1",
-    "jquery": "^2.2.1",
+    "jquery": "^3.4.0",
     "node-env-file": "^0.1.8",
     "react": "0.14.*",
     "react-dom": "^0.14.7",
