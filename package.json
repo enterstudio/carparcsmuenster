@@ -5,7 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "dev": "webpack --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -25,12 +27,14 @@
     "babel-preset-stage-0": "6.3.13",
     "bootstrap": "^3.3.6",
     "flux": "^2.1.1",
-    "jquery": "^2.2.1",
+    "jquery": "^3.5.0",
     "node-env-file": "^0.1.8",
     "react": "0.14.*",
     "react-dom": "^0.14.7",
     "react-google-maps": "^4.9.1",
     "react-router": "1.0.3",
-    "webpack": "^1.12.14"
-  }
+    "webpack": "^1.12.14",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
